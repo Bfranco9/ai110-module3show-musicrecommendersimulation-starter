@@ -29,6 +29,11 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+A recommendation system primarily uses stages in order to recomment a system: candidate generation, scoring and ranking, and re-ranking. These go to identify the relevance in large categories which are used to predict based on past user interactions with the different attributes from listened to songs, searches, and general interactions (i.e. likes or saves). Then there is a third stage where it can re-rank the evaluation to reintroduce recommendations outside of the designated scoring for "freshness"
+
+We are going to implement some of those features found in popular recommendation systems by looking at categorical data like mood, genre, and artist and compare the numberical data like the energy, tempo, acousticness, and valence to provide a range and rank songs and lists. The categorical data will have more weight compared to the numerical data and the main points that have the most significance is the acousticness and tempo/bpm to measure the preference.
+
+
 ---
 
 ## Getting Started
