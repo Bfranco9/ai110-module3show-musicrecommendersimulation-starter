@@ -35,14 +35,49 @@ TASTE_PROFILE = {
 }
 
 
+# Adversarial / edge-case profiles: each one probes a specific weakness in score_song.
+ADVERSARIAL_PROFILES = {
+    # Categorical labels say "loud", numeric targets say "quiet". Does the 4.6
+    # points of genre+mood outrank a song that actually fits the numbers?
+    "Conflicted Metalhead": {
+        "genre": "metal",
+        "mood": "aggressive",
+        "energy": 0.10,
+        "tempo_bpm": 60,
+        "valence": 0.60,
+        "danceability": 0.30,
+        "acousticness": 0.95,
+    },
+    # Genre/mood not in the catalog and numbers outside 0-1 / the BPM range:
+    # no categorical points are possible and closeness clamps to 0.
+    "Out-of-Vocabulary Fan": {
+        "genre": "k-pop",
+        "mood": "bittersweet",
+        "artist": "Nobody Known",
+        "energy": 1.50,
+        "tempo_bpm": 300,
+        "valence": -0.20,
+        "danceability": 1.00,
+        "acousticness": 0.50,
+    },
+    # Sparse, dead-center profile: no genre, mood or artist, only middling
+    # targets. Does everything tie, and is the /10.5 max score still fair?
+    "Perfectly Average Listener": {
+        "energy": 0.50,
+        "valence": 0.50,
+    },
+}
+
+
 def main() -> None:
     songs = load_songs(str(SONGS_CSV))
 
-    user_prefs = TASTE_PROFILE
+    profiles = {"Taste Profile (lofi/chill)": TASTE_PROFILE, **ADVERSARIAL_PROFILES}
 
-    recommendations = recommend_songs(user_prefs, songs, k=5)
-
-    print_recommendations(recommendations)
+    for name, user_prefs in profiles.items():
+        print(f"\n### {name}")
+        recommendations = recommend_songs(user_prefs, songs, k=5)
+        print_recommendations(recommendations)
 
 
 def print_recommendations(recommendations, max_score: float = MAX_SCORE) -> None:

@@ -5,6 +5,7 @@
 Give your model a short, descriptive name.  
 Example: **VibeFinder 1.0**  
 
+PickMySong 1.0
 ---
 
 ## 2. Intended Use  
@@ -16,6 +17,9 @@ Prompts:
 - What kind of recommendations does it generate  
 - What assumptions does it make about the user  
 - Is this for real users or classroom exploration  
+
+
+It generates recommendations on a set list of music genres and songs. It assumes based on genre, mood, dacability, tempo, and other likeness factors common amongst songs. This is more used for a classroom exploration instead of a real life case with the limited dataset.
 
 ---
 
@@ -57,6 +61,7 @@ Prompts:
 - Did you add or remove data  
 - Are there parts of musical taste missing in the dataset  
 
+There are a total of 20 songs in the dataset. There are lofi, rock, pop, and similar music choices. There is an original dataset of 10 with 10 additional added to increase the range of music for the  recommender to align a result. There is still missing many niche sounds like metal, diffrerent alternatives, even country from what I read.
 ---
 
 ## 5. Strengths  
@@ -69,6 +74,7 @@ Prompts:
 - Any patterns you think your scoring captures correctly  
 - Cases where the recommendations matched your intuition  
 
+It does take into consideration mainstream music choices. The patterns it scores correctly are heavily based on existing mood a song has an the genre with some accounting for the cadence/bpm to help.
 ---
 
 ## 6. Limitations and Bias 
@@ -82,6 +88,7 @@ Prompts:
 - Cases where the system overfits to one preference  
 - Ways the scoring might unintentionally favor some users  
 
+Genre (2.8 points) and mood (1.8 points) together make up 46% of the 10-point base score, so a label match can outweigh what the user's numeric targets say. In my "Conflicted Metalhead" test, the profile asked for metal and aggressive but also energy 0.10 and acousticness 0.95. Iron Horizon, a loud metal song at energy 0.97, still came first at 6.26 because it matched both labels. A song that actually fit the quiet numbers could not catch up.
 ---
 
 ## 7. Evaluation  
@@ -97,6 +104,8 @@ Prompts:
 
 No need for numeric metrics unless you created some.
 
+It does behave as expected with the exception of no idea of how to "judge" generes that are out of context.
+
 ---
 
 ## 8. Future Work  
@@ -110,6 +119,7 @@ Prompts:
 - Improving diversity among the top results  
 - Handling more complex user tastes  
 
+The future implimintation could include using a larger expanding database with randomized songs to match each niche and mainstream music genre and choice. This can be randomized on each attempt to suggest new songs even if the user preferences hasn't changed to broaden the recommnedations.
 ---
 
 ## 9. Personal Reflection  
